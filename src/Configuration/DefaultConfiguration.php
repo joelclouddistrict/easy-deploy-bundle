@@ -319,7 +319,7 @@ final class DefaultConfiguration extends AbstractConfiguration
 
     public function fixPermissionsWithAcl(string $webServerUser) : self
     {
-        $this->permissionMethod = 'acl';
+        $this->permissionMethod = 'setfacl';
         $this->permissionUser = $webServerUser;
 
         return $this;

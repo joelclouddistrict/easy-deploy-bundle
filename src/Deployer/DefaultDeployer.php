@@ -43,7 +43,7 @@ abstract class DefaultDeployer extends AbstractDeployer
         $requirements[] = new AllowsLoginViaSsh($allServers);
         $requirements[] = new CommandExists($appServers, $this->getConfig(Option::remoteComposerBinaryPath));
         if ('acl' === $this->getConfig(Option::permissionMethod)) {
-            $requirements[] = new CommandExists($appServers, $this->getConfig('setfacl'));
+            $requirements[] = new CommandExists($appServers, 'setfacl');
         }
 
         return $requirements;
@@ -323,7 +323,7 @@ abstract class DefaultDeployer extends AbstractDeployer
             return;
         }
 
-        if ('acl' === $permissionMethod) {
+        if ('setfacl' === $permissionMethod) {
             $this->runRemote(sprintf('sudo setfacl -RL -m u:"%s":rwX -m u:`whoami`:rwX %s', $this->getConfig(Option::permissionUser), $writableDirs));
             $this->runRemote(sprintf('sudo setfacl -dRL -m u:"%s":rwX -m u:`whoami`:rwX %s', $this->getConfig(Option::permissionUser), $writableDirs));
 
