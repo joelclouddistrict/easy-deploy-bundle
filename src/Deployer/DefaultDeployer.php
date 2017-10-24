@@ -281,7 +281,7 @@ abstract class DefaultDeployer extends AbstractDeployer
         $this->log('<h2>Creating symlinks for shared directories</>');
         foreach ($this->getConfig(Option::sharedDirs) as $sharedDir) {
             $this->runRemote(sprintf('mkdir -p {{ deploy_dir }}/shared/%s', $sharedDir));
-            $this->runRemote(sprintf('if [ -d {{ project_dir }}/%s ] ; then rm -rf {{ project_dir }}/%s; fi', $sharedDir, $sharedDir));
+            //$this->runRemote(sprintf('if [ -d {{ project_dir }}/%s ] ; then rm -rf {{ project_dir }}/%s; fi', $sharedDir, $sharedDir));
             $this->runRemote(sprintf('ln -nfs {{ deploy_dir }}/shared/%s {{ project_dir }}/%s', $sharedDir, $sharedDir));
         }
     }
